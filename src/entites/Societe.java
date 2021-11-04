@@ -50,7 +50,7 @@ public abstract class Societe {
 
     public void setRaison_sociale(String raison_sociale)  {
         //filtre pour savoir si la raison sociale est nulle
-        if (raison_sociale.equals(""))
+        if (raison_sociale=="")
         {
             //on renvoie une erreur avec le message approprié
             try {
@@ -73,7 +73,7 @@ public abstract class Societe {
     {
         //on vérifie si le numéro de rue n'a pas été saisie
 
-        if (numero_rue.equals(""))
+        if (numero_rue=="")
         {
             try {
                 throw new MonException("");
@@ -92,7 +92,7 @@ public abstract class Societe {
 
     public void setNom_rue(String nom_rue) {
         //on vérifie si le nom de rue n'a pas été saisi
-        if (nom_rue.equals("")){
+        if (nom_rue==""){
             try {
                 throw new  MonException("");
             } catch (MonException e) {
@@ -110,7 +110,7 @@ public abstract class Societe {
     public void setCode_postal(String code_postal)
     {
         //on verifie si le code postal est vide
-        if (code_postal.equals(""))
+        if (code_postal=="")
         {
             try {
                 throw new MonException("");
@@ -129,7 +129,7 @@ public abstract class Societe {
     public void setVille(String ville)
     {
         //on vérifie si la ville a bien été saisi
-        if (ville.equals(""))
+        if (ville=="")
         {
             try {
                 throw new MonException("");
@@ -169,7 +169,7 @@ public abstract class Societe {
     public void setNum_tel(String num_tel)
     {
         //on vérifie si le numéro de telephone a bien été saisie
-        if (num_tel.equals(""))
+        if (num_tel=="")
         {
             //on renvoie l' erreur
             try {

@@ -1,6 +1,7 @@
 package com.company;
 
 import Exceptions.MonException;
+import Vues.Accueil;
 import entites.Clients;
 import entites.List_clients;
 import entites.List_prospects;
@@ -28,7 +29,9 @@ public class Main {
     public static void main(String[] args){
     remplir_liste_clients();
     remplir_liste_prospects();
-
+       // Accueil accueil = new Accueil();
+        //accueil.setVisible(true);
+        //accueil.pack();
     }
         /**
          * méthode  qui permet de remplir ma liste de clients
@@ -49,6 +52,7 @@ public class Main {
                         "2", "rue Test", "54000", "NANCY",
                         "monemail@a.com", "0606060606", "commentaires",
                         150001, 151);
+
                     Clients clb = new Clients("Sarl_alex",
                         "3", "rue Test", "54000", "NANCY",
                         "monemail@a.com", "06060606060", "commentaires",
@@ -84,15 +88,17 @@ public class Main {
                         "Nancy"
                         , "email@email.com", "0606060606", "commentaire",
                         LocalDate.parse("19/02/2021", format), "oui");
+
                 Prospects pra = new Prospects("Mon_deuxieme_prospect", "2", "Rue ma rue",
                         "54000",
                         "Nancy"
-                        , "email@email.com", "06060606",
+                        , "email@email.com", "0606060606",
                         "commentaire", LocalDate.parse("20/02/2021", format), "oui");
+
                 Prospects prb = new Prospects("Mon_troisieme",
                         "4", "Rue ma rue", "54000",
                         "Nancy"
-                        , "email@email.com", "060606060", "commentaire",
+                        , "email@email.com", "06060606006", "commentaire",
                         LocalDate.parse("18/02/2021", format), "oui");
                 ma_liste_prospects.add(pr);
                 ma_liste_prospects.add(pra);
