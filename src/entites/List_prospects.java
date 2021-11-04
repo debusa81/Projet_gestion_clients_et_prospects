@@ -7,10 +7,12 @@ import java.util.List;
  * Classe contenant la liste de prospects
  */
 
-public class List_prospects {
+public class List_prospects
+{
     private static List<Prospects> maliste_prospects;
 
-    public static List<Prospects> getMaliste_prospects() {
+    public static List<Prospects> getMaliste_prospects()
+    {
         return maliste_prospects;
     }
 }
