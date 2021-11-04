@@ -53,7 +53,7 @@ public class Clients extends Societe
     public void setChiffre_affaire(double chiffre_affaire)
     {
         //on vérifie que le chiffre d' affaire soit bien supérieur à 200
-        if (chiffre_affaire>200)
+        if (chiffre_affaire<200)
         {
             //sinon on renvoie une erreur
             try {
