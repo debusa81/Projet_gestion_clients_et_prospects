@@ -1,8 +1,15 @@
 package Exceptions;
 
-public class MonException extends Throwable {
+/**
+ * @author Alexandre Debus
+ * @version  1
+ *
+ */
+public class MonException extends Throwable
+{
 
-    public MonException(String message){
+    public MonException(String message)
+    {
         System.out.println(message);
     }
 }
