@@ -40,7 +40,7 @@ public class Main {
 
             //on crée des objets clients et on les ajoute à la liste
 
-            try {
+
                     Clients   cl = new Clients("SARL_alex",
                         "1", "rue Test", "54000", "NANCY",
                         "monemail@a.com", "0606060606", "commentaires",
@@ -57,10 +57,7 @@ public class Main {
                     ma_liste.add(cl);
                     ma_liste.add(cla);
                     ma_liste.add(clb);
-                } catch (MonException e)
-                    {
-                    e.printStackTrace();
-                    }
+
 
             //affichage de la liste
             System.out.println(ma_liste);
