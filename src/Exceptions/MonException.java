@@ -5,7 +5,7 @@ package Exceptions;
  * @version  1
  *
  */
-public class MonException extends Throwable
+public class MonException extends Exception
 {
 
     public MonException(String message)

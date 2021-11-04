@@ -27,19 +27,25 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args){
-    remplir_liste_clients();
+
+    remplir_liste_clients(List_clients.getMa_liste());
     remplir_liste_prospects();
-       // Accueil accueil = new Accueil();
-        //accueil.setVisible(true);
-        //accueil.pack();
+    get_liste();
+        Accueil accueil = new Accueil();
+        accueil.setVisible(true);
+        accueil.pack();
+
+
+
+
     }
         /**
          * méthode  qui permet de remplir ma liste de clients
          */
-        public static void remplir_liste_clients()
+        public static List<Clients> remplir_liste_clients(List<Clients> ma_liste)
         {
             //recupération de ma liste de clients
-            List<Clients> ma_liste = List_clients.getMa_liste();
+              ma_liste = new ArrayList<Clients>();
 
             //on crée des objets clients et on les ajoute à la liste
 
@@ -64,8 +70,10 @@ public class Main {
 
 
             //affichage de la liste
-            System.out.println(ma_liste);
+            //System.out.println(ma_liste);
 
+
+            return ma_liste;
 
         }
 
@@ -112,5 +120,20 @@ public class Main {
             System.out.println(ma_liste_prospects);
 
         }
+        public static String get_liste(){
+        String s= String.valueOf(remplir_liste_clients(List_clients.getMa_liste()).get(0));
+
+            return s ;
+        }
+    public static String get_liste_un(){
+        String s= String.valueOf(remplir_liste_clients(List_clients.getMa_liste()).get(1));
+
+        return s ;
+    }
+    public static String get_liste_deux(){
+        String s= String.valueOf(remplir_liste_clients(List_clients.getMa_liste()).get(2));
+
+        return s ;
+    }
     }
 

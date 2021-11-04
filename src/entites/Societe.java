@@ -10,8 +10,8 @@ import Exceptions.MonException;
 public abstract class Societe {
     //attributs d'instance
     private  int id;
-    private  String Raison_sociale;
-    private  String numero_rue;
+    private  String Raisonsociale;
+    private  String numerorue;
     private  String nom_rue;
     private  String Code_postal;
     private  String Ville;
@@ -45,12 +45,12 @@ public abstract class Societe {
     }
 
     public String getRaison_sociale() {
-        return Raison_sociale;
+        return Raisonsociale;
     }
 
     public void setRaison_sociale(String raison_sociale)  {
         //filtre pour savoir si la raison sociale est nulle
-        if (raison_sociale=="")
+        if (raison_sociale.trim()=="")
         {
             //on renvoie une erreur avec le message approprié
             try {
@@ -62,18 +62,18 @@ public abstract class Societe {
 
 
         }
-        Raison_sociale = raison_sociale;
+        Raisonsociale = raison_sociale;
     }
 
     public String getNumero_rue() {
-        return numero_rue;
+        return numerorue;
     }
 
     public void setNumero_rue(String numero_rue)
     {
         //on vérifie si le numéro de rue n'a pas été saisie
 
-        if (numero_rue=="")
+        if (numero_rue.trim()=="")
         {
             try {
                 throw new MonException("");
@@ -82,7 +82,7 @@ public abstract class Societe {
                         System.out.println("il manque un élément à votre adresse, il faut remplir numéro rue ");
                     }
         }
-        this.numero_rue = numero_rue;
+        this.numerorue = numero_rue;
     }
 
     public String getNom_rue()
@@ -92,7 +92,7 @@ public abstract class Societe {
 
     public void setNom_rue(String nom_rue) {
         //on vérifie si le nom de rue n'a pas été saisi
-        if (nom_rue==""){
+        if (nom_rue.trim()==""){
             try {
                 throw new  MonException("");
             } catch (MonException e) {
@@ -110,7 +110,7 @@ public abstract class Societe {
     public void setCode_postal(String code_postal)
     {
         //on verifie si le code postal est vide
-        if (code_postal=="")
+        if (code_postal.trim()=="")
         {
             try {
                 throw new MonException("");
@@ -210,7 +210,7 @@ public abstract class Societe {
     @Override
     public String toString()
     {
-        return Raison_sociale+" "+numero_rue+" "+nom_rue+"\n"+Code_postal+
+        return Raisonsociale+" "+numerorue+" "+nom_rue+"\n"+Code_postal+
                 " "+Ville+"  "+ email +" "+ Comments;
     }
 }
