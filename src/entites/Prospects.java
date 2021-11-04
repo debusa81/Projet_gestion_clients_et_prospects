@@ -12,10 +12,13 @@ import java.time.format.FormatStyle;
 import java.util.Date;
 
 /**
+ * @author Alexandre Debus
  * classe Prospects héritant de la classe Societe
+ * @version 1
  */
 
-public class Prospects  extends Societe{
+public class Prospects  extends Societe
+{
     //attribut de classe  de la classe Prospects
     private static int id_prospects=0;
 
@@ -26,8 +29,10 @@ public class Prospects  extends Societe{
 
     //constructeur implicit de la classe Prospects  heritant du constructeur de Societe
     public Prospects( String raison_sociale, String Numero_rue, String nom_marue, String code, String ville,
-                      String email, String telephone,String commentaires, LocalDate prospect_date, String prospect_interesse)
-            throws ParseException {
+                      String email, String telephone,String commentaires, LocalDate prospect_date,
+                      String prospect_interesse)
+            throws ParseException
+    {
         super( raison_sociale, Numero_rue, nom_marue, code, ville, email,telephone ,commentaires);
 
 
@@ -43,6 +48,7 @@ public class Prospects  extends Societe{
         System.out.println(prospect_date);
         this.prospect_interesse = prospect_interesse;
     }
+    //constructeur avec un parametre
     public Prospects(String prospect_date)
     {
 
