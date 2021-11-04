@@ -92,21 +92,23 @@ public class Prospects  extends Societe
         //on initialise la variable val_prospect
         int val_prospect = 0;
         //si le parametre equivaut à oui ,non ou autre chose
-        if (prospect_interesse.equals("oui")){
-            val_prospect=1;
-        }else if(prospect_interesse.equals("non")) {
-            val_prospect=0;
-        }else
+        if (prospect_interesse.equals("oui"))
         {
-            //on renvoie une erreur si  ce n'est pas oui ou non
-                try
+            val_prospect=1;
+        }else if(prospect_interesse.equals("non"))
+            {
+            val_prospect=0;
+            }else
                 {
-                throw new MonException("");
-                } catch (MonException e)
+                //on renvoie une erreur si  ce n'est pas oui ou non
+                try
                     {
+                        throw new MonException("");
+                    } catch (MonException e)
+                        {
 
-                System.out.println("la valeur n'est pas bonne elle doit etre soit oui  soit non");
-                    }
+                            System.out.println("la valeur n'est pas bonne elle doit etre soit oui  soit non");
+                        }
         }
 
         this.prospect_interesse = val_prospect;

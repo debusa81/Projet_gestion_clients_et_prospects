@@ -76,6 +76,7 @@ public class Main {
             ma_liste_prospects = new ArrayList<>();
             //ajout et création d'objet Prospects à la liste
             try {
+                //on vérifie que la date soit au bon format
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 Prospects pr = new Prospects("Mon_prospect", "1", "Rue ma rue",
