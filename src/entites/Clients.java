@@ -7,7 +7,8 @@ import Exceptions.MonException;
  * classe Clients héritant de la classe Societe
  */
 
-public class Clients extends Societe{
+public class Clients extends Societe
+{
     //attribut de classe de la classe client
     private static int id_clients=0;
     //attributs d' instances
@@ -17,19 +18,24 @@ public class Clients extends Societe{
     //constructeur avec deux caractères
 
 
-    public Clients(double chiffre_affaire, int nbr_employes) {
+    public Clients(double chiffre_affaire, int nbr_employes)
+    {
         this.chiffre_affaire = chiffre_affaire;
         this.nbr_employes = nbr_employes;
     }
 
     //constructeur implicit héritant de celui de Société
-    public Clients(String Raison_sociale, String numero_rue, String Nom_rue, String Code_postal, String ville, String email, String telephone, String commentaires, double chiffre_affaire, int nbr_employes) throws MonException {
+    public Clients(String Raison_sociale, String numero_rue, String Nom_rue, String Code_postal, String ville,
+                   String email, String telephone, String commentaires, double chiffre_affaire,
+                   int nbr_employes)
+    {
         super(Raison_sociale,numero_rue,Nom_rue,Code_postal,ville,email,telephone,commentaires);
         setChiffre_affaire(chiffre_affaire);
 
         setNbr_employes(nbr_employes);
         id_clients++;
     }
+
     //getters et setters
 
     public static int getId_clients() {
@@ -44,13 +50,18 @@ public class Clients extends Societe{
         return chiffre_affaire;
     }
 
-    public void setChiffre_affaire(double chiffre_affaire) {
-        if (chiffre_affaire<200){
+    public void setChiffre_affaire(double chiffre_affaire)
+    {
+        //on vérifie que le chiffre d' affaire soit bien supérieur à 200
+        if (chiffre_affaire>200)
+        {
+            //sinon on renvoie une erreur
             try {
                 throw new MonException("");
-            } catch (MonException e) {
-                System.out.println("le chiffre d' affaire ne doit pas etre inférieur à 200");
-            }
+                } catch (MonException e)
+                    {
+                        System.out.println("le chiffre d' affaire ne doit pas etre inférieur à 200");
+                    }
 
         }
         this.chiffre_affaire = chiffre_affaire;
@@ -60,13 +71,18 @@ public class Clients extends Societe{
         return nbr_employes;
     }
 
-    public void setNbr_employes(int nbr_employes) {
-        if (nbr_employes==0){
+    public void setNbr_employes(int nbr_employes)
+    {
+        //on vérifie que le nombre d'employé soit différent de 0
+        if (nbr_employes==0)
+        {
+            //sinon on renvoit une erreur
             try {
                 throw  new MonException("");
-            } catch (MonException e) {
-                System.out.println(" le nombre d' employé doit etre strictement  supérieur à 0");
-            }
+                } catch (MonException e)
+                    {
+                        System.out.println(" le nombre d' employé doit etre strictement  supérieur à 0");
+                    }
         }
         this.nbr_employes = nbr_employes;
     }
@@ -76,7 +92,8 @@ public class Clients extends Societe{
      * @return chaine de caractère des données de sociéte + celle de Clients
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return super.toString() +
                 "  " + chiffre_affaire +
                 " " + nbr_employes
