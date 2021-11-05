@@ -20,7 +20,7 @@ public abstract class Societe {
     private  String Comments;
     //constructeur implicit
     public  Societe(String raison_sociale,String Numero_rue,String nom_marue,String code,String ville,String
-                    email,String telephone,String commentaires)
+                    email,String telephone,String commentaires)throws MonException
     {
                 setId(id);
                 setRaison_sociale(raison_sociale);
@@ -48,17 +48,14 @@ public abstract class Societe {
         return Raisonsociale;
     }
 
-    public void setRaison_sociale(String raison_sociale)  {
+    public void setRaison_sociale(String raison_sociale) throws MonException  {
         //filtre pour savoir si la raison sociale est nulle
         if (raison_sociale.trim()=="")
         {
             //on renvoie une erreur avec le message approprié
-            try {
+
                 throw new  MonException("");
-                } catch (MonException e)
-                    {
-                        System.out.println("la raison sociale ne peut pas etre null");
-                    }
+
 
 
         }
@@ -69,18 +66,15 @@ public abstract class Societe {
         return numerorue;
     }
 
-    public void setNumero_rue(String numero_rue)
+    public void setNumero_rue(String numero_rue) throws MonException
     {
         //on vérifie si le numéro de rue n'a pas été saisie
 
         if (numero_rue.trim()=="")
         {
-            try {
+
                 throw new MonException("");
-                } catch (MonException e)
-                    {
-                        System.out.println("il manque un élément à votre adresse, il faut remplir numéro rue ");
-                    }
+
         }
         this.numerorue = numero_rue;
     }
@@ -90,14 +84,12 @@ public abstract class Societe {
         return nom_rue;
     }
 
-    public void setNom_rue(String nom_rue) {
+    public void setNom_rue(String nom_rue) throws MonException{
         //on vérifie si le nom de rue n'a pas été saisi
         if (nom_rue.trim()==""){
-            try {
+
                 throw new  MonException("");
-            } catch (MonException e) {
-                System.out.println(" Il manque un éléement à votre adresse , il faut remplir nom rue");
-            }
+
         }
         this.nom_rue = nom_rue;
     }
@@ -107,17 +99,14 @@ public abstract class Societe {
         return Code_postal;
     }
 
-    public void setCode_postal(String code_postal)
+    public void setCode_postal(String code_postal) throws MonException
     {
         //on verifie si le code postal est vide
         if (code_postal.trim()=="")
         {
-            try {
+
                 throw new MonException("");
-                } catch (MonException e)
-                    {
-                        System.out.println("il manque un élément à votre adresse , il faut remplir le code postal ");
-                    }
+
         }
         Code_postal = code_postal;
     }
@@ -126,17 +115,14 @@ public abstract class Societe {
         return Ville;
     }
 
-    public void setVille(String ville)
+    public void setVille (String ville) throws MonException
     {
         //on vérifie si la ville a bien été saisi
         if (ville=="")
         {
-            try {
+
                 throw new MonException("");
-                } catch (MonException e)
-                    {
-                        System.out.println(" il manque un élément à votre adresse, il faut renseigner une ville");
-                    }
+
         }
         Ville = ville;
     }
@@ -146,17 +132,14 @@ public abstract class Societe {
         return email;
     }
 
-    public void setEmail(String email)
+    public void setEmail(String email) throws MonException
     {
         //on vérifie si l'email ne contient pas  d' @
         if (!email.contains("@"))
         {
-            try {
+
                 throw  new MonException("");
-                } catch (MonException e)
-                    {
-                        System.out.println("ceci n'est pas une adresse mail, il ne contient pas d' @");
-                    }
+
         }
         this.email = email;
     }
@@ -166,28 +149,23 @@ public abstract class Societe {
         return num_tel;
     }
 
-    public void setNum_tel(String num_tel)
+    public void setNum_tel(String num_tel) throws MonException
     {
         //on vérifie si le numéro de telephone a bien été saisie
         if (num_tel=="")
         {
             //on renvoie l' erreur
-            try {
+
                 throw new MonException("");
-            } catch (MonException e) {
-                System.out.println(" le numéro de teléphone ne peut pas etre vide veuillez le renseigner");
-            }
+
         }
         //on vérifie  que le numéro de telephone ne soit pas inférieur à 10 caractères
          if (num_tel.length()<10)
          {
              //on renvoie une erreur avec le bon message
-             try {
+
                  throw  new MonException("");
-                  } catch (MonException e)
-                    {
-                        System.out.println("le numéro de téléphone doit avoir au moins 10 caractères");
-                    }
+
          }
 
         this.num_tel = num_tel;

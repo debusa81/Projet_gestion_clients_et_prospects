@@ -15,9 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Alexandre Debus
@@ -26,11 +24,11 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws MonException{
 
     remplir_liste_clients(List_clients.getMa_liste());
     remplir_liste_prospects();
-    get_liste();
+
         Accueil accueil = new Accueil();
         accueil.setVisible(true);
         accueil.pack();
@@ -42,7 +40,7 @@ public class Main {
         /**
          * méthode  qui permet de remplir ma liste de clients
          */
-        public static List<Clients> remplir_liste_clients(List<Clients> ma_liste)
+        public static List<Clients> remplir_liste_clients(List<Clients> ma_liste) throws MonException
         {
             //recupération de ma liste de clients
               ma_liste = new ArrayList<Clients>();
@@ -67,7 +65,13 @@ public class Main {
                     ma_liste.add(cl);
                     ma_liste.add(cla);
                     ma_liste.add(clb);
-
+               //tri de la liste avant affichage
+            Collections.sort(ma_liste, new Comparator<Clients>() {
+                @Override
+                public int compare(Clients o1, Clients o2) {
+                    return o1.getRaison_sociale().compareTo(o2.getRaison_sociale());
+                }
+            });
 
             //affichage de la liste
             //System.out.println(ma_liste);
@@ -80,7 +84,7 @@ public class Main {
         /**
          * méthode qui permet de remplir la liste prospect
          */
-        public static void remplir_liste_prospects()
+        public static void remplir_liste_prospects() throws MonException
         {
             //recupération de la liste  de prospects
             List<Prospects> ma_liste_prospects = List_prospects.getMaliste_prospects();
@@ -116,24 +120,16 @@ public class Main {
                     {
                         e.printStackTrace();
                     }
+
             //affichage de la liste
             System.out.println(ma_liste_prospects);
 
         }
-        public static String get_liste(){
+        public static String get_liste() throws MonException{
         String s= String.valueOf(remplir_liste_clients(List_clients.getMa_liste()).get(0));
 
             return s ;
         }
-    public static String get_liste_un(){
-        String s= String.valueOf(remplir_liste_clients(List_clients.getMa_liste()).get(1));
 
-        return s ;
-    }
-    public static String get_liste_deux(){
-        String s= String.valueOf(remplir_liste_clients(List_clients.getMa_liste()).get(2));
-
-        return s ;
-    }
     }
 

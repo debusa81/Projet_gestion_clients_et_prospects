@@ -1,15 +1,18 @@
 package Vues;
 
+import Exceptions.MonException;
 import com.company.Main;
 import entites.Clients;
 import entites.List_clients;
+import entites.Societe;
+import utilitaires.Utilitaires;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
-public class Accueil extends JFrame {
+public class Accueil extends JFrame  {
     private JPanel contentPane;
     private JButton BTN_clients;
     private JButton BTN_prospects;
@@ -22,6 +25,7 @@ public class Accueil extends JFrame {
     private JButton BTN_afficher;
     private JComboBox CBX_societe;
     private JButton BTN_accueil;
+    private JButton BTN_confirm;
 
 
     public Accueil() {
@@ -34,6 +38,8 @@ public class Accueil extends JFrame {
         BTN_suprimmer.setVisible(false);
         CBX_societe.setVisible(false);
         BTN_accueil.setVisible(false);
+        BTN_confirm.setVisible(false);
+        final Societe[] soc = new Societe[1];
 
         this.setPreferredSize(new Dimension(400,400));
 
@@ -90,7 +96,12 @@ public class Accueil extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 CBX_societe.setVisible(true);
-                List<Clients> man=Main.remplir_liste_clients(List_clients.getMa_liste());
+                List<Clients> man= null;
+                try {
+                    man = Main.remplir_liste_clients(List_clients.getMa_liste());
+                } catch (MonException ex) {
+                    ex.printStackTrace();
+                }
                 System.out.println(man.get(0).getRaison_sociale());
                 for (Clients s: man){
                     CBX_societe.addItem(s.getRaison_sociale());
@@ -103,14 +114,30 @@ public class Accueil extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Affichage aff = new Affichage();
+                List<Clients> liste_clients=List_clients.getMa_liste();
+                try {
+                    liste_clients=Main.remplir_liste_clients(liste_clients);
+                } catch (MonException ex) {
+                    ex.printStackTrace();
+                }
+                Affichage aff = null;
+                try {
+
+                    aff = new Affichage(liste_clients);
+                } catch (MonException ex) {
+                    ex.printStackTrace();
+                }
                 aff.setVisible(true);
                 aff.pack();
                 //JOptionPane.showMessageDialog(null,);
 
-            List<Clients>nom= List_clients.getMa_liste();
-            Main.remplir_liste_clients(nom);
-             //List<Clients> mon_nom;
+            //List<Clients>nom= List_clients.getMa_liste();
+              //  try {
+                //    Main.remplir_liste_clients(nom);
+                //} catch (MonException ex) {
+                  //  ex.printStackTrace();
+                //}
+                //List<Clients> mon_nom;
              //mon_nom=nom;
 
 
@@ -120,23 +147,70 @@ public class Accueil extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Formulaire fm = new Formulaire();
-                fm.setVisible(true);
-                fm.pack();
+               Utilitaires.ACTION action= Utilitaires.ACTION.CREATION;
+
+                dispose();
+               // Formulaire fm = new Formulaire(action,new Clients());
+                //fm.setVisible(true);
+                //fm.pack();
             }
         });
         BTN_suprimmer.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
                 CBX_societe.setVisible(true);
-                List<Clients> man=Main.remplir_liste_clients(List_clients.getMa_liste());
+                List<Clients> man= null;
+                try {
+                    man = Main.remplir_liste_clients(List_clients.getMa_liste());
+                } catch (MonException ex) {
+                    ex.printStackTrace();
+                }
                 System.out.println(man.get(0).getRaison_sociale());
                 for (Clients s: man){
                     CBX_societe.addItem(s.getRaison_sociale());
+
                 }
+                BTN_confirm.setVisible(true);
+
+                List<Clients> finalMan = man;
+                BTN_confirm.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        super.mouseClicked(e);
+                        for (Clients clients: finalMan){
+                            if (clients.getRaison_sociale()==CBX_societe.getSelectedItem().toString())
+                            {
+
+                                Formulaire f = new Formulaire(Utilitaires.ACTION.SUPRESSION,clients);
+                                f.setVisible(true);
+                                f.pack();
+
+                            }
+
+                        }
+
+                        //Formulaire f = new Formulaire(Utilitaires.ACTION.SUPRESSION);
+                        //f.setVisible(true);
+                        //f.pack();
 
 
+                    }
+                });
+
+            }
+        });
+
+
+        BTN_accueil.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                dispose();
+                Accueil ac = new Accueil();
+                ac.setVisible(true);
+                ac.pack();
             }
         });
     }

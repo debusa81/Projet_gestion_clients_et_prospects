@@ -31,7 +31,7 @@ public class Prospects  extends Societe
     public Prospects( String raison_sociale, String Numero_rue, String nom_marue, String code, String ville,
                       String email, String telephone,String commentaires, LocalDate prospect_date,
                       String prospect_interesse)
-            throws ParseException
+            throws ParseException,MonException
     {
         super( raison_sociale, Numero_rue, nom_marue, code, ville, email,telephone ,commentaires);
 

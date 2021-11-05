@@ -1,5 +1,6 @@
 package Vues;
 
+import Exceptions.MonException;
 import com.company.Main;
 import entites.Clients;
 import entites.List_clients;
@@ -15,7 +16,7 @@ public class Affichage extends JFrame {
     private JButton buttonOK;
     private JButton buttonCancel;
 
-    public Affichage() {
+    public Affichage( List<Clients> ma_liste) throws MonException {
         setContentPane(contentPane);
        ;
 
@@ -38,11 +39,8 @@ public class Affichage extends JFrame {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-            List<Clients>liste=List_clients.getMa_liste();
-            String ma_ligne = Main.get_liste();
-        String ma_ligne_un = Main.get_liste_un();
-        String ma_ligne_deux = Main.get_liste_deux();
 
+        System.out.println(ma_liste);
 
 
 
@@ -53,9 +51,10 @@ public class Affichage extends JFrame {
 
 
        DefaultListModel model = new DefaultListModel();
-       model.addElement(ma_ligne);
-       model.addElement(ma_ligne_un);
-       model.addElement(ma_ligne_deux);
+
+        for (Clients c:ma_liste){
+            model.addElement(c);
+        }
        LST_obj.setModel(model);
 
 
