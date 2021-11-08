@@ -26,10 +26,11 @@ public class Main {
 
     public static void main(String[] args) throws MonException{
 
-    remplir_liste_clients(List_clients.getMa_liste());
+
+    List test_liste = remplir_liste_clients(List_clients.getMa_liste());
     remplir_liste_prospects();
 
-        Accueil accueil = new Accueil();
+        Accueil accueil = new Accueil(test_liste);
         accueil.setVisible(true);
         accueil.pack();
 
@@ -48,11 +49,12 @@ public class Main {
             //on crée des objets clients et on les ajoute à la liste
 
 
-                    Clients   cl = new Clients("SARL_alex",
+                   Clients    cl = new Clients("SARL_alex",
                         "1", "rue Test", "54000", "NANCY",
                         "monemail@a.com", "0606060606", "commentaires",
                      150000, 150);
-                    Clients cla = new Clients("Sarl_test",
+
+           Clients  cla = new Clients("Sarl_test",
                         "2", "rue Test", "54000", "NANCY",
                         "monemail@a.com", "0606060606", "commentaires",
                         150001, 151);

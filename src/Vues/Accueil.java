@@ -28,7 +28,7 @@ public class Accueil extends JFrame  {
     private JButton BTN_confirm;
 
 
-    public Accueil() {
+    public Accueil(List ma_liste) {
         setContentPane(contentPane);
 
 
@@ -40,6 +40,8 @@ public class Accueil extends JFrame  {
         BTN_accueil.setVisible(false);
         BTN_confirm.setVisible(false);
         final Societe[] soc = new Societe[1];
+        final Societe[] val = new Societe[1];
+
 
         this.setPreferredSize(new Dimension(400,400));
 
@@ -71,7 +73,7 @@ public class Accueil extends JFrame  {
                 BTN_modifier.setVisible(true);
                 BTN_suprimmer.setVisible(true);
                 BTN_accueil.setVisible(true);
-                System.out.println("je suis une instance de clients ");
+
 
             }
         });
@@ -96,16 +98,58 @@ public class Accueil extends JFrame  {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 CBX_societe.setVisible(true);
+
                 List<Clients> man= null;
-                try {
-                    man = Main.remplir_liste_clients(List_clients.getMa_liste());
-                } catch (MonException ex) {
-                    ex.printStackTrace();
-                }
-                System.out.println(man.get(0).getRaison_sociale());
-                for (Clients s: man){
+
+                    man = ma_liste;
+
+                System.out.println(man.get(0));
+                System.out.println(man);
+                BTN_confirm.setVisible(true);
+                for (Clients s: man) {
                     CBX_societe.addItem(s.getRaison_sociale());
+                    List<Clients> finalMan = man;
+                    BTN_confirm.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            super.mouseClicked(e);
+                            if (s.getRaison_sociale()==CBX_societe.getSelectedItem().toString()){
+                                System.out.println(s);
+                                val[0]=s;
+                                Formulaire fr = null;
+                                try {
+                                    fr = new Formulaire(Utilitaires.ACTION.MODIFICATION,s, ma_liste);
+                                } catch (MonException ex) {
+                                    ex.printStackTrace();
+                                }
+                                fr.setVisible(true);
+                                fr.pack();
+
+                            }
+
+
+                        }
+                    });
+
+
+
                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             }
@@ -114,31 +158,18 @@ public class Accueil extends JFrame  {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                List<Clients> liste_clients=List_clients.getMa_liste();
-                try {
-                    liste_clients=Main.remplir_liste_clients(liste_clients);
-                } catch (MonException ex) {
-                    ex.printStackTrace();
-                }
+                System.out.println(ma_liste);
+
                 Affichage aff = null;
                 try {
 
-                    aff = new Affichage(liste_clients);
+                    aff = new Affichage(ma_liste);
                 } catch (MonException ex) {
                     ex.printStackTrace();
                 }
                 aff.setVisible(true);
                 aff.pack();
-                //JOptionPane.showMessageDialog(null,);
 
-            //List<Clients>nom= List_clients.getMa_liste();
-              //  try {
-                //    Main.remplir_liste_clients(nom);
-                //} catch (MonException ex) {
-                  //  ex.printStackTrace();
-                //}
-                //List<Clients> mon_nom;
-             //mon_nom=nom;
 
 
             }
@@ -150,9 +181,15 @@ public class Accueil extends JFrame  {
                Utilitaires.ACTION action= Utilitaires.ACTION.CREATION;
 
                 dispose();
-               // Formulaire fm = new Formulaire(action,new Clients());
-                //fm.setVisible(true);
-                //fm.pack();
+                Formulaire form = null;
+                try {
+                    form = new Formulaire(action, new Clients(),ma_liste);
+                } catch (MonException ex) {
+                    ex.printStackTrace();
+                }
+                form.setVisible(true);
+                form.pack();
+
             }
         });
         BTN_suprimmer.addMouseListener(new MouseAdapter() {
@@ -175,6 +212,7 @@ public class Accueil extends JFrame  {
                 BTN_confirm.setVisible(true);
 
                 List<Clients> finalMan = man;
+                List<Clients> finalMan1 = man;
                 BTN_confirm.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -183,7 +221,12 @@ public class Accueil extends JFrame  {
                             if (clients.getRaison_sociale()==CBX_societe.getSelectedItem().toString())
                             {
 
-                                Formulaire f = new Formulaire(Utilitaires.ACTION.SUPRESSION,clients);
+                                Formulaire f = null;
+                                try {
+                                    f = new Formulaire(Utilitaires.ACTION.SUPRESSION,clients,ma_liste);
+                                } catch (MonException ex) {
+                                    ex.printStackTrace();
+                                }
                                 f.setVisible(true);
                                 f.pack();
 
@@ -191,15 +234,14 @@ public class Accueil extends JFrame  {
 
                         }
 
-                        //Formulaire f = new Formulaire(Utilitaires.ACTION.SUPRESSION);
-                        //f.setVisible(true);
-                        //f.pack();
 
+                        dispose();
 
                     }
                 });
 
             }
+
         });
 
 
@@ -208,11 +250,12 @@ public class Accueil extends JFrame  {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 dispose();
-                Accueil ac = new Accueil();
+                Accueil ac = new Accueil(ma_liste);
                 ac.setVisible(true);
                 ac.pack();
             }
         });
+
     }
 
 

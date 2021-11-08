@@ -9,7 +9,7 @@ import Exceptions.MonException;
  */
 public abstract class Societe {
     //attributs d'instance
-    private  int id;
+    private  int id=1;
     private  String Raisonsociale;
     private  String numerorue;
     private  String nom_rue;
@@ -22,7 +22,7 @@ public abstract class Societe {
     public  Societe(String raison_sociale,String Numero_rue,String nom_marue,String code,String ville,String
                     email,String telephone,String commentaires)throws MonException
     {
-                setId(id);
+
                 setRaison_sociale(raison_sociale);
                 setNumero_rue(Numero_rue);
                 setNom_rue(nom_marue);
@@ -31,6 +31,7 @@ public abstract class Societe {
                 setNum_tel(telephone);
                 setVille(ville);
                 setComments(commentaires);
+
     }
     //constructeur vide
     public  Societe(){}
@@ -54,7 +55,7 @@ public abstract class Societe {
         {
             //on renvoie une erreur avec le message approprié
 
-                throw new  MonException("");
+                throw new  MonException("la raison sociale doit etre renseigné ");
 
 
 
@@ -73,7 +74,7 @@ public abstract class Societe {
         if (numero_rue.trim()=="")
         {
 
-                throw new MonException("");
+                throw new MonException("le numero de la rue doit etre renseigné");
 
         }
         this.numerorue = numero_rue;
@@ -88,7 +89,7 @@ public abstract class Societe {
         //on vérifie si le nom de rue n'a pas été saisi
         if (nom_rue.trim()==""){
 
-                throw new  MonException("");
+                throw new  MonException("le nom de rue doit etre renseigné");
 
         }
         this.nom_rue = nom_rue;
@@ -105,7 +106,7 @@ public abstract class Societe {
         if (code_postal.trim()=="")
         {
 
-                throw new MonException("");
+                throw new MonException("le code postal doit etre renseigné");
 
         }
         Code_postal = code_postal;
@@ -121,7 +122,7 @@ public abstract class Societe {
         if (ville=="")
         {
 
-                throw new MonException("");
+                throw new MonException("la ville ne peut pas etre vide ");
 
         }
         Ville = ville;
@@ -138,7 +139,7 @@ public abstract class Societe {
         if (!email.contains("@"))
         {
 
-                throw  new MonException("");
+                throw  new MonException("il n' y a pas d'arobase dans l'email");
 
         }
         this.email = email;
@@ -156,7 +157,7 @@ public abstract class Societe {
         {
             //on renvoie l' erreur
 
-                throw new MonException("");
+                throw new MonException(" le numero de telephone ne doit pas etre vide ");
 
         }
         //on vérifie  que le numéro de telephone ne soit pas inférieur à 10 caractères
@@ -164,7 +165,7 @@ public abstract class Societe {
          {
              //on renvoie une erreur avec le bon message
 
-                 throw  new MonException("");
+                 throw  new MonException(" le numéro de telephone doit contenir + de 9 caracteres  ");
 
          }
 

@@ -10,7 +10,7 @@ import Exceptions.MonException;
 public class Clients extends Societe
 {
     //attribut de classe de la classe client
-    private static int id_clients=0;
+    private static int id_clients;
     //attributs d' instances
     private double chiffre_affaire;
     private int  nbr_employes;
@@ -31,8 +31,12 @@ public class Clients extends Societe
     {
         super(Raison_sociale,numero_rue,Nom_rue,Code_postal,ville,email,telephone,commentaires);
         setChiffre_affaire(chiffre_affaire);
+       id_clients= this.getId();
 
         setNbr_employes(nbr_employes);
+        id_clients++;
+    }
+    public Clients(){
         id_clients++;
     }
 
@@ -57,7 +61,7 @@ public class Clients extends Societe
         {
             //sinon on renvoie une erreur
 
-                throw new MonException("");
+                throw new MonException("le chiffre d' affaire doit etre supérieur à 200");
 
 
         }
@@ -75,7 +79,7 @@ public class Clients extends Societe
         {
             //sinon on renvoit une erreur
 
-                throw  new MonException("");
+                throw  new MonException(" le nombre d' employé  doit etre supérieur à 0");
 
         }
         this.nbr_employes = nbr_employes;

@@ -35,7 +35,7 @@ public class Prospects  extends Societe
     {
         super( raison_sociale, Numero_rue, nom_marue, code, ville, email,telephone ,commentaires);
 
-
+                id_prospects= this.getId();
        setProspect_date(String.valueOf(prospect_date));
        setProspect_interesse(prospect_interesse);
        //incrementation de id prospects
