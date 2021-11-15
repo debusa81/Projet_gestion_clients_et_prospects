@@ -32,6 +32,8 @@ public abstract class Societe {
                 setVille(ville);
                 setComments(commentaires);
 
+
+
     }
     //constructeur vide
     public  Societe(){}
@@ -49,15 +51,14 @@ public abstract class Societe {
         return Raisonsociale;
     }
 
-    public void setRaison_sociale(String raison_sociale) throws Exception_entites {
+    public void setRaison_sociale(String raison_sociale) throws Exception_entites
+    {
         //filtre pour savoir si la raison sociale est nulle
         if (    raison_sociale==null       ||  raison_sociale.trim() == "")
         {
             //on renvoie une erreur avec le message approprié
 
                 throw new Exception_entites("la raison sociale doit etre renseigné ");
-
-
 
         }
         Raisonsociale = raison_sociale;
@@ -73,7 +74,6 @@ public abstract class Societe {
 
         if (numero_rue==null||numero_rue.trim()=="")
         {
-
                 throw new Exception_entites("le numero de la rue doit etre renseigné");
 
         }
@@ -85,12 +85,11 @@ public abstract class Societe {
         return nom_rue;
     }
 
-    public void setNom_rue(String nom_rue) throws Exception_entites {
+    public void setNom_rue(String nom_rue) throws Exception_entites
+    {
         //on vérifie si le nom de rue n'a pas été saisi
         if (nom_rue==null||nom_rue.trim()==""){
-
                 throw new Exception_entites("le nom de rue doit etre renseigné");
-
         }
         this.nom_rue = nom_rue;
     }
@@ -105,7 +104,6 @@ public abstract class Societe {
         //on verifie si le code postal est vide
         if (code_postal==null||code_postal.trim()=="")
         {
-
                 throw new Exception_entites("le code postal doit etre renseigné");
 
         }
@@ -138,7 +136,6 @@ public abstract class Societe {
         //on vérifie si l'email ne contient pas  d' @
         if (email==null||!email.contains("@"))
         {
-
                 throw  new Exception_entites("il n' y a pas d'arobase dans l'email");
 
         }

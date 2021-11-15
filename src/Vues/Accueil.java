@@ -1,16 +1,21 @@
 package Vues;
 
-import Exceptions.MonException;
+import Exceptions.Exception_entites;
 import com.company.Main;
-import entites.Clients;
-import entites.List_clients;
-import entites.Societe;
+import entites.*;
 import utilitaires.Utilitaires;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+/**
+ * @author Alexandre Debus
+ * @version 1
+ */
 
 public class Accueil extends JFrame  {
     private JPanel contentPane;
@@ -26,237 +31,301 @@ public class Accueil extends JFrame  {
     private JComboBox CBX_societe;
     private JButton BTN_accueil;
     private JButton BTN_confirm;
+    private JPanel PAN_ajout_mod;
+    private JPanel PAN_confirm_combo;
+    Utilitaires.TYPESOCIETE typesociete;
+    Utilitaires.ACTION  action;
 
 
-    public Accueil(List ma_liste) {
+    public Accueil()throws Exception_entites
+    {
         setContentPane(contentPane);
-
-
-        BTN_ajouter.setVisible(false);
-        BTN_afficher.setVisible(false);
-        BTN_modifier.setVisible(false);
-        BTN_suprimmer.setVisible(false);
-        CBX_societe.setVisible(false);
+        //on cache les éléments
+        PAN_ajout_mod.setVisible(false);
+        PAN_confirm_combo.setVisible(false);
         BTN_accueil.setVisible(false);
-        BTN_confirm.setVisible(false);
-        final Societe[] soc = new Societe[1];
-        final Societe[] val = new Societe[1];
 
 
+        //on définit les préférence de dimensions
         this.setPreferredSize(new Dimension(400,400));
 
-        // call onCancel() when cross is clicked
-
-
+        //on quitte l' application quand on clique sur la croix
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // call onCancel() on ESCAPE
-
-        BTN_quitter.addMouseListener(new MouseAdapter() {
+        //au click sur le bouton cliquer
+        BTN_quitter.addMouseListener(new MouseAdapter()
+        {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e)
+            {
                 super.mouseClicked(e);
                 dispose();
             }
         });
-        BTN_clients.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                BTN_clients.setVisible(false);
-                BTN_prospects.setVisible(false);
-                LAB_choix.setVisible(false);
-                LAB_bienvenue.setText("Bienvenue sur la liste des clients ");
-                BTN_ajouter.setVisible(true);
-                BTN_afficher.setVisible(true);
-                BTN_modifier.setVisible(true);
-                BTN_suprimmer.setVisible(true);
-                BTN_accueil.setVisible(true);
+        //au clique sur le bouton clients
 
 
-            }
-        });
+        //au click du bouton prospects
         BTN_prospects.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+
                 super.mouseClicked(e);
                 BTN_prospects.setVisible(false);
                 BTN_clients.setVisible(false);
                 LAB_choix.setVisible(false);
                 LAB_bienvenue.setText("Bienvenue sur la liste des prospects");
-
-                BTN_ajouter.setVisible(true);
-                BTN_afficher.setVisible(true);
-                BTN_modifier.setVisible(true);
-                BTN_suprimmer.setVisible(true);
+                PAN_ajout_mod.setVisible(true);
                 BTN_accueil.setVisible(true);
+                typesociete= Utilitaires.TYPESOCIETE.PROSPECTS;
             }
         });
-        BTN_modifier.addMouseListener(new MouseAdapter() {
+
+
+        //click au bouton modifier
+        BTN_modifier.addMouseListener(new MouseAdapter()
+        {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e)
+            {
                 super.mouseClicked(e);
-                CBX_societe.setVisible(true);
+                CBX_societe.removeAllItems();
+                PAN_confirm_combo.setVisible(true);
 
-                List<Clients> man= null;
+                ArrayList test = null;
+                    //on vérifie bien qu'il s'agit un client
 
-                    man = ma_liste;
-
-                System.out.println(man.get(0));
-                System.out.println(man);
-                BTN_confirm.setVisible(true);
-                for (Clients s: man) {
-                    CBX_societe.addItem(s.getRaison_sociale());
-                    List<Clients> finalMan = man;
-                    BTN_confirm.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            super.mouseClicked(e);
-                            if (s.getRaison_sociale()==CBX_societe.getSelectedItem().toString()){
-                                System.out.println(s);
-                                val[0]=s;
-                                Formulaire fr = null;
-                                try {
-                                    fr = new Formulaire(Utilitaires.ACTION.MODIFICATION,s, ma_liste);
-                                } catch (MonException ex) {
-                                    ex.printStackTrace();
-                                }
-                                fr.setVisible(true);
-                                fr.pack();
-
-                            }
-
-
-                        }
-                    });
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-        });
-        BTN_afficher.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                System.out.println(ma_liste);
-
-                Affichage aff = null;
-                try {
-
-                    aff = new Affichage(ma_liste);
-                } catch (MonException ex) {
-                    ex.printStackTrace();
-                }
-                aff.setVisible(true);
-                aff.pack();
-
-
-
-            }
-        });
-        BTN_ajouter.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-               Utilitaires.ACTION action= Utilitaires.ACTION.CREATION;
-
-                dispose();
-                Formulaire form = null;
-                try {
-                    form = new Formulaire(action, new Clients(),ma_liste);
-                } catch (MonException ex) {
-                    ex.printStackTrace();
-                }
-                form.setVisible(true);
-                form.pack();
-
-            }
-        });
-        BTN_suprimmer.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                CBX_societe.setVisible(true);
-                List<Clients> man= null;
-                try {
-                    man = Main.remplir_liste_clients(List_clients.getMa_liste());
-                } catch (MonException ex) {
-                    ex.printStackTrace();
-                }
-                System.out.println(man.get(0).getRaison_sociale());
-                for (Clients s: man){
-                    CBX_societe.addItem(s.getRaison_sociale());
-
-                }
-                BTN_confirm.setVisible(true);
-
-                List<Clients> finalMan = man;
-                List<Clients> finalMan1 = man;
-                BTN_confirm.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        super.mouseClicked(e);
-                        for (Clients clients: finalMan){
-                            if (clients.getRaison_sociale()==CBX_societe.getSelectedItem().toString())
-                            {
-
-                                Formulaire f = null;
-                                try {
-                                    f = new Formulaire(Utilitaires.ACTION.SUPRESSION,clients,ma_liste);
-                                } catch (MonException ex) {
-                                    ex.printStackTrace();
-                                }
-                                f.setVisible(true);
-                                f.pack();
-
-                            }
+                    if (typesociete== Utilitaires.TYPESOCIETE.CLIENTS)
+                    {
+                        ArrayList<Clients> man= null;
+                        man = List_clients.getMa_liste();
+                        for (Clients s: man)
+                        {
+                            //on ajoute toutes les raisons sociales au combobox
+                            CBX_societe.addItem(s.getRaison_sociale());
 
                         }
 
-
-                        dispose();
+                    }else
+                    {
+                        ArrayList<Prospects> man;
+                        man=List_prospects.getMaliste_prospects();
+                        for (Prospects prospects:man)
+                        {
+                            CBX_societe.addItem(prospects.getRaison_sociale());
+                        }
 
                     }
-                });
+                //on rend visible le bouton de confirmation
+                     BTN_confirm.setVisible(true);
+                    //on indique qu'il s'agit d' une modification
+                    action= Utilitaires.ACTION.MODIFICATION;
+            }
+        });
+        //au click du bouton afficher
+        BTN_afficher.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                //on crée  un nouvel affichage
+                Affichage aff = null;
+                try
+                {
+
+                    aff = new Affichage(typesociete);
+                } catch (Exception_entites ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                aff.setVisible(true);
+                aff.pack();
+                //on ferme la fenetre
+                dispose();
+
+
 
             }
+        });
+        //au click du bouton ajouter
+        BTN_ajouter.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+                //on affecte qu'il s'agit d'une création
+                action= Utilitaires.ACTION.CREATION;
+                //on ferme la fenetre
+                dispose();
+                //et on crée un nouveau formulaire
+                Formulaire form = null;
+                //si il s'agit d'un client
+                if (typesociete == Utilitaires.TYPESOCIETE.CLIENTS)
+                {
+                    try
+                    {
+                        form = new Formulaire(action, new Clients(),typesociete);
+                    } catch (Exception_entites ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                }else {
+                    try {
+                        form = new Formulaire(action,new Prospects(),typesociete);
+                        } catch (Exception_entites ex)
+                            {
+                            ex.printStackTrace();
+                            }
+                      }
 
+
+                        form.setVisible(true);
+                        form.pack();
+
+            }
+        });
+        //au click sur le bouton supprimer
+        BTN_suprimmer.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+                //on rend la combobox visible
+                PAN_confirm_combo.setVisible(true);
+                //on verifie qu' au démarrage notre combobox est vide
+                CBX_societe.removeAllItems();
+
+                CBX_societe.setVisible(true);
+                BTN_confirm.setVisible(true);
+                //on indique qu'il s'agit d' une supression
+                action= Utilitaires.ACTION.SUPRESSION;
+                //on affiche nos listes pour clients et prospects
+                if (typesociete== Utilitaires.TYPESOCIETE.CLIENTS)
+                {
+
+                    for (int i = 0; i < List_clients.getMa_liste().size(); i++)
+                    {
+                        CBX_societe.addItem(List_clients.getMa_liste().get(i).getRaison_sociale());
+
+                    }
+                }else
+                {
+                    for (int i = 0; i < List_prospects.getMaliste_prospects().size(); i++)
+                    {
+                        CBX_societe.addItem(List_prospects.getMaliste_prospects().get(i).getRaison_sociale());
+                    }
+                }
+            }
+
+
+        });
+        BTN_confirm.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                if (typesociete== Utilitaires.TYPESOCIETE.CLIENTS)
+                {
+                    //on compare si la raison sociale choisie est présente dans la liste
+
+                    for (int i = 0; i <List_clients.getMa_liste().size() ; i++)
+                    {
+
+                        if (CBX_societe.getSelectedItem().toString()==List_clients.getMa_liste().get(i).
+                                getRaison_sociale())
+                        {
+                            Societe societe= List_clients.getMa_liste().get(i);
+                            //on crée alors le formulaire
+                            try {
+                                Formulaire formulaire= new Formulaire(action,societe,typesociete);
+                                formulaire.setVisible(true);
+                                formulaire.pack();
+                            } catch (Exception_entites ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+                }else
+                {
+                    //on compare pour la liste de prospects
+                    for (int i = 0; i <List_prospects.getMaliste_prospects().size() ; i++)
+                    {
+
+                    if (Objects.equals(CBX_societe.getSelectedItem().toString(), List_prospects.getMaliste_prospects().
+                            get(i).
+                            getRaison_sociale()))
+                        {
+
+                             Societe societe = List_prospects.getMaliste_prospects().get(i);
+                            //création du formulaire
+                            try
+                            {
+                                Formulaire  formulaire = new Formulaire(action,societe,typesociete);
+                                formulaire.setVisible(true);
+                                formulaire.pack();
+                            } catch (Exception_entites ex)
+                            {
+                                ex.printStackTrace();
+                            }
+                        }
+
+                    }
+                }
+                //on ferme la fenetre
+                dispose();
+            }
         });
 
 
-        BTN_accueil.addMouseListener(new MouseAdapter() {
+
+            //au click du bouton accueil
+        BTN_accueil.addMouseListener(new MouseAdapter()
+        {
+            //on ferme la fenetre et on réinitialise au départ la page d' accueil
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e)
+            {
                 super.mouseClicked(e);
                 dispose();
-                Accueil ac = new Accueil(ma_liste);
+                Accueil ac = null;
+                try
+                {
+                    ac = new Accueil();
+                } catch (Exception_entites ex) {
+                    ex.printStackTrace();
+                }
                 ac.setVisible(true);
                 ac.pack();
             }
         });
 
-    }
 
+        BTN_clients.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                //on cache et on montre les élements dont on a besoin
+                BTN_clients.setVisible(false);
+                BTN_prospects.setVisible(false);
+                LAB_choix.setVisible(false);
+                LAB_bienvenue.setText("Bienvenue sur la liste des clients ");
+                PAN_ajout_mod.setVisible(true);
+                BTN_accueil.setVisible(true);
+                 typesociete= Utilitaires.TYPESOCIETE.CLIENTS;
+
+            }
+        });
+
+    }
 
 }

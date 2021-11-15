@@ -1,0 +1,111 @@
+						JAVADOC
+
+Page main:
+/**
+ * @author Alexandre Debus
+ * @version 1
+ */
+ /**
+ * 
+ * méthode remplir liste clients  qui permet de remplir ma liste de clients
+ */
+ /**
+ * méthode  remplir_liste_prospects qui permet de remplir la liste prospect
+ */
+
+Page accueil:
+/**
+ * @author Alexandre Debus
+ * @version 1
+ */
+
+Page affichage :
+/**
+ * @author Debus Alexandre
+ * @version 1
+ */
+Page formulaire :
+/**
+ * @author Alexandre Debus
+ * @version 1
+ */
+
+/**constructeur  du formulaire
+     *
+     * @param action action du formulaire 
+     * @param societe l'objet  societe
+     * @param typesociete   (clients ou prospects)
+     * @throws Exception_entites les exceptions que l' on a definit 
+     */
+ /**
+     * Méthode remplir champs qui permet de remplir tous les champs  par défaut quand il s' agit d'une modification ou d' une suppresion
+     * @param societe notre societe
+     */
+
+
+/**
+     * Méthode Verifications champs qui permet la vérification de tous les champs rentrés  ainsi que la création d'une société
+     * (Clients ou prospects)
+     * @param societe  notre sociéte
+     * @param ma_liste la liste qu'on a récupére dans notre formulaire
+     * @throws Exception_entites toutes les exceptions que l' on a créeé
+     */
+ /**
+     * Méthode supression qui permet de supprimer de la liste  de clients ou de prospects
+     * @param societe   notre objet
+     * @param typesociete  le type de societe
+     */
+
+Classes métiers:
+classe société:
+/**
+ * @author Alexandre Debus
+ * classe Societe
+ * @version 1
+ */
+
+  /**
+     * methode tostring
+     * @return  chaine de caractères  des données de société
+     */
+
+classe Clients:
+/**
+ * @author Alexandre Debus
+ * classe Clients héritant de la classe Societe
+ * @version 1
+ */
+
+ /**
+     * methode to_string
+     * @return chaine de caractère des données de sociéte + celle de Clients
+     */
+Classe prospects:
+
+**
+ * @author Alexandre Debus
+ * classe Prospects héritant de la classe Societe
+ * @version 1
+ */
+
+/**
+     * methode to_string
+     * @return une chaine de caractères avec toutes les données  de Société + celle de Prospects
+     */
+
+
+
+Classe Liste_client:
+
+/**
+ * @author Alexandre Debus
+ * classe contenant la liste de clients
+ * @version 1
+ */
+
+Classe Liste_prospects:
+
+/**
+ * @author Alexandre Debus
+ * Classe contenant la liste de prospects
+ */

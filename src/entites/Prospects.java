@@ -5,6 +5,7 @@ import Exceptions.Exception_entites;
 import java.text.ParseException;
 import java.time.LocalDate;
 
+
 /**
  * @author Alexandre Debus
  * classe Prospects héritant de la classe Societe
@@ -29,27 +30,35 @@ public class Prospects  extends Societe
     {
         super( raison_sociale, Numero_rue, nom_marue, code, ville, email,telephone ,commentaires);
 
-                id_prospects= this.getId();
+
        setProspect_date(String.valueOf(prospect_date));
        setProspect_interesse(prospect_interesse);
        //incrementation de id prospects
-       id_prospects++;
+       id_prospects=id_prospects+1;
+       setId(id_prospects);
     }
     //constructeur avec deux parametres
-    public Prospects(LocalDate prospect_date, int prospect_interesse)
+    public Prospects(LocalDate prospect_date, String prospect_interesse) throws Exception_entites
     {
         setProspect_date(String.valueOf(prospect_date));
-        System.out.println(prospect_date);
-        this.prospect_interesse = prospect_interesse;
+
+        setProspect_interesse(prospect_interesse);
+        id_prospects++;
+        setId(id_prospects);
     }
     //constructeur avec un parametre
     public Prospects(String prospect_date)
     {
 
             setProspect_date(prospect_date);
+            id_prospects=id_prospects+1;
+            setId(id_prospects);
 
     }
-    public Prospects(){}
+    public Prospects(){
+        id_prospects=id_prospects+1;
+        setId(id_prospects);
+    }
 
 
         //getter et setter
@@ -73,9 +82,6 @@ public class Prospects  extends Societe
 
         this.prospect_date= LocalDate.parse(prospect_date);
 
-
-
-
     }
 
     public int getProspect_interesse()
@@ -83,7 +89,7 @@ public class Prospects  extends Societe
         return prospect_interesse;
     }
 
-    public void setProspect_interesse(String prospect_interesse)
+    public void setProspect_interesse(String prospect_interesse)throws Exception_entites
     {
         //on initialise la variable val_prospect
         int val_prospect = 0;
@@ -97,14 +103,9 @@ public class Prospects  extends Societe
             }else
                 {
                 //on renvoie une erreur si  ce n'est pas oui ou non
-                    try
-                    {
-                        throw new Exception_entites("");
-                    } catch (Exception_entites e)
-                        {
 
-                            System.out.println("la valeur n'est pas bonne elle doit etre soit oui  soit non");
-                        }
+                        throw new Exception_entites(" veuillez cocher un radio bouton ou indiquer oui ou non");
+
                 }
 
         this.prospect_interesse = val_prospect;
