@@ -10,7 +10,7 @@ import Exceptions.Exception_entites;
 public class Clients extends Societe
 {
     //attribut de classe de la classe client
-    private static int id_clients;
+    private static int id_clients=0;
     //attributs d' instances
     private double chiffre_affaire;
     private int  nbr_employes;
@@ -22,6 +22,7 @@ public class Clients extends Societe
     {
         this.chiffre_affaire = chiffre_affaire;
         this.nbr_employes = nbr_employes;
+        id_clients++;
     }
 
     //constructeur implicit héritant de celui de Société
@@ -32,12 +33,15 @@ public class Clients extends Societe
         super(Raison_sociale,numero_rue,Nom_rue,Code_postal,ville,email,telephone,commentaires);
         setChiffre_affaire(chiffre_affaire);
 
-
         setNbr_employes(nbr_employes);
-        id_clients++;
+        id_clients=id_clients+1;
+        setId(id_clients);
+
+
     }
     public Clients(){
-        id_clients++;
+        id_clients=id_clients+1;
+        setId(id_clients);
     }
 
     //getters et setters
@@ -46,9 +50,7 @@ public class Clients extends Societe
         return id_clients;
     }
 
-    public static void setId_clients(int id_clients) {
-        Clients.id_clients = id_clients;
-    }
+
 
     public double getChiffre_affaire() {
         return chiffre_affaire;
