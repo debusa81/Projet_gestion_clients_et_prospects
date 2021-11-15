@@ -1,5 +1,6 @@
 package entites;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,9 +10,9 @@ import java.util.List;
 
 public class List_prospects
 {
-    private static List<Prospects> maliste_prospects;
+    private static ArrayList<Prospects> maliste_prospects = new ArrayList<Prospects>();
 
-    public static List<Prospects> getMaliste_prospects()
+    public static ArrayList<Prospects> getMaliste_prospects()
     {
         return maliste_prospects;
     }

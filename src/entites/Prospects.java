@@ -1,15 +1,9 @@
 package entites;
 
-import Exceptions.MonException;
+import Exceptions.Exception_entites;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-import java.util.Date;
 
 /**
  * @author Alexandre Debus
@@ -31,7 +25,7 @@ public class Prospects  extends Societe
     public Prospects( String raison_sociale, String Numero_rue, String nom_marue, String code, String ville,
                       String email, String telephone,String commentaires, LocalDate prospect_date,
                       String prospect_interesse)
-            throws ParseException,MonException
+            throws ParseException, Exception_entites
     {
         super( raison_sociale, Numero_rue, nom_marue, code, ville, email,telephone ,commentaires);
 
@@ -55,6 +49,8 @@ public class Prospects  extends Societe
             setProspect_date(prospect_date);
 
     }
+    public Prospects(){}
+
 
         //getter et setter
     public static int getId_prospects()
@@ -97,19 +93,19 @@ public class Prospects  extends Societe
             val_prospect=1;
         }else if(prospect_interesse.equals("non"))
             {
-            val_prospect=0;
+                val_prospect=0;
             }else
                 {
                 //on renvoie une erreur si  ce n'est pas oui ou non
-                try
+                    try
                     {
-                        throw new MonException("");
-                    } catch (MonException e)
+                        throw new Exception_entites("");
+                    } catch (Exception_entites e)
                         {
 
                             System.out.println("la valeur n'est pas bonne elle doit etre soit oui  soit non");
                         }
-        }
+                }
 
         this.prospect_interesse = val_prospect;
     }

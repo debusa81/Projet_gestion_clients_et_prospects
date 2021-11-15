@@ -1,6 +1,6 @@
 package entites;
 
-import Exceptions.MonException;
+import Exceptions.Exception_entites;
 
 /**
  * @author Alexandre Debus
@@ -9,7 +9,7 @@ import Exceptions.MonException;
  */
 public abstract class Societe {
     //attributs d'instance
-    private  int id=1;
+    private  int id;
     private  String Raisonsociale;
     private  String numerorue;
     private  String nom_rue;
@@ -20,7 +20,7 @@ public abstract class Societe {
     private  String Comments;
     //constructeur implicit
     public  Societe(String raison_sociale,String Numero_rue,String nom_marue,String code,String ville,String
-                    email,String telephone,String commentaires)throws MonException
+                    email,String telephone,String commentaires)throws Exception_entites
     {
 
                 setRaison_sociale(raison_sociale);
@@ -49,13 +49,13 @@ public abstract class Societe {
         return Raisonsociale;
     }
 
-    public void setRaison_sociale(String raison_sociale) throws MonException  {
+    public void setRaison_sociale(String raison_sociale) throws Exception_entites {
         //filtre pour savoir si la raison sociale est nulle
-        if (raison_sociale.trim()=="")
+        if (    raison_sociale==null       ||  raison_sociale.trim() == "")
         {
             //on renvoie une erreur avec le message approprié
 
-                throw new  MonException("la raison sociale doit etre renseigné ");
+                throw new Exception_entites("la raison sociale doit etre renseigné ");
 
 
 
@@ -67,14 +67,14 @@ public abstract class Societe {
         return numerorue;
     }
 
-    public void setNumero_rue(String numero_rue) throws MonException
+    public void setNumero_rue(String numero_rue) throws Exception_entites
     {
         //on vérifie si le numéro de rue n'a pas été saisie
 
-        if (numero_rue.trim()=="")
+        if (numero_rue==null||numero_rue.trim()=="")
         {
 
-                throw new MonException("le numero de la rue doit etre renseigné");
+                throw new Exception_entites("le numero de la rue doit etre renseigné");
 
         }
         this.numerorue = numero_rue;
@@ -85,11 +85,11 @@ public abstract class Societe {
         return nom_rue;
     }
 
-    public void setNom_rue(String nom_rue) throws MonException{
+    public void setNom_rue(String nom_rue) throws Exception_entites {
         //on vérifie si le nom de rue n'a pas été saisi
-        if (nom_rue.trim()==""){
+        if (nom_rue==null||nom_rue.trim()==""){
 
-                throw new  MonException("le nom de rue doit etre renseigné");
+                throw new Exception_entites("le nom de rue doit etre renseigné");
 
         }
         this.nom_rue = nom_rue;
@@ -100,13 +100,13 @@ public abstract class Societe {
         return Code_postal;
     }
 
-    public void setCode_postal(String code_postal) throws MonException
+    public void setCode_postal(String code_postal) throws Exception_entites
     {
         //on verifie si le code postal est vide
-        if (code_postal.trim()=="")
+        if (code_postal==null||code_postal.trim()=="")
         {
 
-                throw new MonException("le code postal doit etre renseigné");
+                throw new Exception_entites("le code postal doit etre renseigné");
 
         }
         Code_postal = code_postal;
@@ -116,13 +116,13 @@ public abstract class Societe {
         return Ville;
     }
 
-    public void setVille (String ville) throws MonException
+    public void setVille (String ville) throws Exception_entites
     {
         //on vérifie si la ville a bien été saisi
-        if (ville=="")
+        if (ville==null||ville=="")
         {
 
-                throw new MonException("la ville ne peut pas etre vide ");
+                throw new Exception_entites("la ville ne peut pas etre vide ");
 
         }
         Ville = ville;
@@ -133,13 +133,13 @@ public abstract class Societe {
         return email;
     }
 
-    public void setEmail(String email) throws MonException
+    public void setEmail(String email) throws Exception_entites
     {
         //on vérifie si l'email ne contient pas  d' @
-        if (!email.contains("@"))
+        if (email==null||!email.contains("@"))
         {
 
-                throw  new MonException("il n' y a pas d'arobase dans l'email");
+                throw  new Exception_entites("il n' y a pas d'arobase dans l'email");
 
         }
         this.email = email;
@@ -150,14 +150,14 @@ public abstract class Societe {
         return num_tel;
     }
 
-    public void setNum_tel(String num_tel) throws MonException
+    public void setNum_tel(String num_tel) throws Exception_entites
     {
         //on vérifie si le numéro de telephone a bien été saisie
-        if (num_tel=="")
+        if (num_tel==null||num_tel=="")
         {
             //on renvoie l' erreur
 
-                throw new MonException(" le numero de telephone ne doit pas etre vide ");
+                throw new Exception_entites(" le numero de telephone ne doit pas etre vide ");
 
         }
         //on vérifie  que le numéro de telephone ne soit pas inférieur à 10 caractères
@@ -165,7 +165,7 @@ public abstract class Societe {
          {
              //on renvoie une erreur avec le bon message
 
-                 throw  new MonException(" le numéro de telephone doit contenir + de 9 caracteres  ");
+                 throw  new Exception_entites(" le numéro de telephone doit contenir + de 9 caracteres  ");
 
          }
 

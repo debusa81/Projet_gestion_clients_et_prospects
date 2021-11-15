@@ -1,6 +1,6 @@
 package entites;
 
-import Exceptions.MonException;
+import Exceptions.Exception_entites;
 
 /**
  * @author Alexandre Debus
@@ -27,11 +27,11 @@ public class Clients extends Societe
     //constructeur implicit héritant de celui de Société
     public Clients(String Raison_sociale, String numero_rue, String Nom_rue, String Code_postal, String ville,
                    String email, String telephone, String commentaires, double chiffre_affaire,
-                   int nbr_employes) throws MonException
+                   int nbr_employes) throws Exception_entites
     {
         super(Raison_sociale,numero_rue,Nom_rue,Code_postal,ville,email,telephone,commentaires);
         setChiffre_affaire(chiffre_affaire);
-       id_clients= this.getId();
+
 
         setNbr_employes(nbr_employes);
         id_clients++;
@@ -54,14 +54,14 @@ public class Clients extends Societe
         return chiffre_affaire;
     }
 
-    public void setChiffre_affaire(double chiffre_affaire) throws MonException
+    public void setChiffre_affaire(double chiffre_affaire) throws Exception_entites
     {
         //on vérifie que le chiffre d' affaire soit bien supérieur à 200
         if (chiffre_affaire<200)
         {
             //sinon on renvoie une erreur
 
-                throw new MonException("le chiffre d' affaire doit etre supérieur à 200");
+                throw new Exception_entites("le chiffre d' affaire doit etre supérieur à 200");
 
 
         }
@@ -72,14 +72,14 @@ public class Clients extends Societe
         return nbr_employes;
     }
 
-    public void setNbr_employes(int nbr_employes) throws MonException
+    public void setNbr_employes(int nbr_employes) throws Exception_entites
     {
         //on vérifie que le nombre d'employé soit différent de 0
         if (nbr_employes==0)
         {
             //sinon on renvoit une erreur
 
-                throw  new MonException(" le nombre d' employé  doit etre supérieur à 0");
+                throw  new Exception_entites(" le nombre d' employé  doit etre supérieur à 0");
 
         }
         this.nbr_employes = nbr_employes;

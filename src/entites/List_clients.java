@@ -6,14 +6,15 @@ package entites;
  * @version 1
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class List_clients
 {
-    private static List<Clients> ma_liste;
+    private static ArrayList<Clients> ma_liste_clients= new ArrayList<>();
 
-    public static List<Clients> getMa_liste()
+    public static ArrayList<Clients> getMa_liste()
     {
-        return ma_liste;
+        return ma_liste_clients;
     }
 }
