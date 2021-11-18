@@ -2,7 +2,7 @@ package utilitaires;
 
 import java.time.format.DateTimeFormatter;
 
-/**
+/**Classe Utilitaires qui permet la création d'énumération de typesociete et d'action
  * @author Debus Alexandre
  * @version 1
  */

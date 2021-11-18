@@ -1,14 +1,18 @@
 package entites;
 
 import Exceptions.Exception_entites;
+import utilitaires.Utilitaires;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 
-/**
+/**Classe prospects qui hérite de Société  et qui a pour attribut supplémentaires la date de prospection et
+ * si le prospect est intéressé
  * @author Alexandre Debus
- * classe Prospects héritant de la classe Societe
+ *
  * @version 1
  */
 
@@ -18,8 +22,8 @@ public class Prospects  extends Societe
     private static int id_prospects=0;
 
     //attributs d' instance
-    private LocalDate prospect_date;
-    private  int prospect_interesse;
+    private LocalDate prospect_datee;
+    private  String prospect_interesse;
 
 
     //constructeur implicit de la classe Prospects  heritant du constructeur de Societe
@@ -31,30 +35,15 @@ public class Prospects  extends Societe
         super( raison_sociale, Numero_rue, nom_marue, code, ville, email,telephone ,commentaires);
 
 
-       setProspect_date(String.valueOf(prospect_date));
+       setProspect_date(prospect_date);
        setProspect_interesse(prospect_interesse);
        //incrementation de id prospects
        id_prospects=id_prospects+1;
        setId(id_prospects);
     }
-    //constructeur avec deux parametres
-    public Prospects(LocalDate prospect_date, String prospect_interesse) throws Exception_entites
-    {
-        setProspect_date(String.valueOf(prospect_date));
 
-        setProspect_interesse(prospect_interesse);
-        id_prospects++;
-        setId(id_prospects);
-    }
-    //constructeur avec un parametre
-    public Prospects(String prospect_date)
-    {
 
-            setProspect_date(prospect_date);
-            id_prospects=id_prospects+1;
-            setId(id_prospects);
 
-    }
     public Prospects(){
         id_prospects=id_prospects+1;
         setId(id_prospects);
@@ -74,41 +63,40 @@ public class Prospects  extends Societe
 
     public LocalDate getProspect_date()
     {
-        return prospect_date;
+        return prospect_datee;
     }
 
-    public void setProspect_date(String prospect_date)
+    /**setter de date qui permet de verifier la date
+     *
+     * @param prospect_date
+     */
+    public void setProspect_date(LocalDate prospect_date)
     {
+        if (prospect_date==null){
+            throw new NullPointerException("la date ne peut pas etre null");
+        }
 
-        this.prospect_date= LocalDate.parse(prospect_date);
+
+        this.prospect_datee= prospect_date;
 
     }
 
-    public int getProspect_interesse()
+    public String getProspect_interesse()
     {
         return prospect_interesse;
     }
 
+    /**setter de prospect interessé qui n' accepte que oui ou non comme valeur
+     *
+     * @param prospect_interesse
+     * @throws Exception_entites
+     */
     public void setProspect_interesse(String prospect_interesse)throws Exception_entites
     {
         //on initialise la variable val_prospect
-        int val_prospect = 0;
-        //si le parametre equivaut à oui ,non ou autre chose
-        if (prospect_interesse.equals("oui"))
-        {
-            val_prospect=1;
-        }else if(prospect_interesse.equals("non"))
-            {
-                val_prospect=0;
-            }else
-                {
-                //on renvoie une erreur si  ce n'est pas oui ou non
 
-                        throw new Exception_entites(" veuillez cocher un radio bouton ou indiquer oui ou non");
 
-                }
-
-        this.prospect_interesse = val_prospect;
+        this.prospect_interesse = prospect_interesse;
     }
 
     /**
@@ -119,7 +107,7 @@ public class Prospects  extends Societe
     public String toString()
     {
         return super.toString() +
-                "" + prospect_date +
+                "" + prospect_datee +
                 ", " + prospect_interesse;
     }
 }

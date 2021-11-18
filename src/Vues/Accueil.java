@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
+/**Classe Accueil qui crée l' accueil de notre applicatif
  * @author Alexandre Debus
  * @version 1
  */
@@ -98,9 +98,9 @@ public class Accueil extends JFrame  {
 
                     if (typesociete== Utilitaires.TYPESOCIETE.CLIENTS)
                     {
-                        ArrayList<Clients> man= null;
-                        man = List_clients.getMa_liste();
-                        for (Clients s: man)
+                        ArrayList<Clients> Liste_clients= null;
+                        Liste_clients = List_clients.getMa_liste_clients();
+                        for (Clients s: Liste_clients)
                         {
                             //on ajoute toutes les raisons sociales au combobox
                             CBX_societe.addItem(s.getRaison_sociale());
@@ -139,7 +139,8 @@ public class Accueil extends JFrame  {
                     aff = new Affichage(typesociete);
                 } catch (Exception_entites ex)
                         {
-                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null,"il y a une erreur de saisie");
+
                         }
                 aff.setVisible(true);
                 aff.pack();
@@ -171,20 +172,24 @@ public class Accueil extends JFrame  {
                         form = new Formulaire(action, new Clients(),typesociete);
                     } catch (Exception_entites ex)
                     {
-                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null,"il y a eu un soucis au niveau " +
+                                "de la création du formulaire ");
+
                     }
                 }else {
                     try {
                         form = new Formulaire(action,new Prospects(),typesociete);
                         } catch (Exception_entites ex)
                             {
-                            ex.printStackTrace();
+                           JOptionPane.showMessageDialog(null,"il y a eu un soucis au" +
+                                   " niveau de la création du formulaire ");
                             }
                       }
 
 
                         form.setVisible(true);
                         form.pack();
+                        dispose();
 
             }
         });
@@ -208,9 +213,9 @@ public class Accueil extends JFrame  {
                 if (typesociete== Utilitaires.TYPESOCIETE.CLIENTS)
                 {
 
-                    for (int i = 0; i < List_clients.getMa_liste().size(); i++)
+                    for (int i = 0; i < List_clients.getMa_liste_clients().size(); i++)
                     {
-                        CBX_societe.addItem(List_clients.getMa_liste().get(i).getRaison_sociale());
+                        CBX_societe.addItem(List_clients.getMa_liste_clients().get(i).getRaison_sociale());
 
                     }
                 }else
@@ -235,20 +240,22 @@ public class Accueil extends JFrame  {
                 {
                     //on compare si la raison sociale choisie est présente dans la liste
 
-                    for (int i = 0; i <List_clients.getMa_liste().size() ; i++)
+                    for (int i = 0; i <List_clients.getMa_liste_clients().size() ; i++)
                     {
 
-                        if (CBX_societe.getSelectedItem().toString()==List_clients.getMa_liste().get(i).
+                        if (CBX_societe.getSelectedItem().toString()==List_clients.getMa_liste_clients().get(i).
                                 getRaison_sociale())
                         {
-                            Societe societe= List_clients.getMa_liste().get(i);
+                            Societe societe= List_clients.getMa_liste_clients().get(i);
                             //on crée alors le formulaire
                             try {
                                 Formulaire formulaire= new Formulaire(action,societe,typesociete);
                                 formulaire.setVisible(true);
                                 formulaire.pack();
                             } catch (Exception_entites ex) {
-                                ex.printStackTrace();
+                                JOptionPane.showMessageDialog(null,"Il y a eu un" +
+                                        " soucis au niveau " +
+                                        "de la création du formulaire");
                             }
                         }
                     }
@@ -299,7 +306,7 @@ public class Accueil extends JFrame  {
                 {
                     ac = new Accueil();
                 } catch (Exception_entites ex) {
-                    ex.printStackTrace();
+                   JOptionPane.showMessageDialog(null,"impossible de retourner à l' accueil");
                 }
                 ac.setVisible(true);
                 ac.pack();

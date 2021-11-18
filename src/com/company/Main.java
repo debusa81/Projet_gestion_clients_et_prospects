@@ -1,5 +1,6 @@
 package com.company;
 
+
 import Exceptions.Exception_entites;
 import Vues.Accueil;
 import entites.Clients;
@@ -8,18 +9,24 @@ import entites.List_prospects;
 import entites.Prospects;
 import utilitaires.Utilitaires;
 
+import javax.swing.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-/**
+/**Classe main qui permet de lancer dans notre programme
  * @author Alexandre Debus
  * @version 1
  */
 
 public class Main {
+    /**
+     * méthode principal du programme
+     * @param args
+     * @throws Exception_entites
+     */
 
     public static void main(String[] args) throws Exception_entites {
 
@@ -27,8 +34,6 @@ public class Main {
         //tri de la liste avant affichage
         remplir_liste_clients();
         remplir_liste_prospects();
-
-
         Accueil accueil = new Accueil();
         accueil.setVisible(true);
         accueil.pack();
@@ -59,9 +64,9 @@ public class Main {
                     "monemail@a.com", "06060606060", "commentaires",
                     152000, 130);
 
-            List_clients.getMa_liste().add(cl);
-            List_clients.getMa_liste().add(cla);
-            List_clients.getMa_liste().add(clb);
+            List_clients.getMa_liste_clients().add(cl);
+            List_clients.getMa_liste_clients().add(cla);
+            List_clients.getMa_liste_clients().add(clb);
 
 
 
@@ -69,7 +74,7 @@ public class Main {
             //on crée des objets clients et on les ajoute à la liste
 
 
-                    Collections.sort(List_clients.getMa_liste(), new Comparator<Clients>()
+                    Collections.sort(List_clients.getMa_liste_clients(), new Comparator<Clients>()
                     {
                 @Override
                 public int compare(Clients o1, Clients o2)
@@ -111,7 +116,8 @@ public class Main {
                         "54000",
                         "Nancy"
                         , "email@email.com", "0606060606",
-                        "commentaire", LocalDate.parse("20/02/2021", Utilitaires.dateTimeFormatter), "oui");
+                        "commentaire", LocalDate.parse("20/02/2021", Utilitaires.dateTimeFormatter),
+                             "oui");
 
                     Prospects prb = new Prospects("Mon_troisieme",
                         "4", "Rue ma rue", "54000",
@@ -126,10 +132,10 @@ public class Main {
 
             } catch (ParseException e)
                     {
-                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null,"La date n'a pu étre converti");
                     }
             catch (DateTimeParseException dateTimeParseException){
-                System.out.println("date pas au bon format");
+                JOptionPane.showMessageDialog(null,"la date n'est pas au bon format ");
             }
 
             //affichage de la liste
