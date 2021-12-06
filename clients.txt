@@ -1,0 +1,6 @@
+SARL_alex 1 rue Test
+54000 NANCY  monemail@a.com commentaires  15000.0 150
+Sarl_classe 3 rue Test
+54000 NANCY  monemail@a.com commentaires  152000.369 130
+Sarl_test 2 rue Test
+54000 NANCY  monemail@a.com commentaires  150001.526 151
